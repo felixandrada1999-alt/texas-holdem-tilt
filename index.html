@@ -35,7 +35,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        h1 { margin: 5px 0; font-size: 1.6rem; letter-spacing: 3px; color: var(--accent-color); text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        h1 { margin: 5px 0; font-size: 1.6rem; letter-spacing: 3px; color: var(--accent-color); }
 
         /* Pantalla de configuración inicial */
         #setup-screen {
@@ -43,160 +43,157 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 50px;
-            background: rgba(0,0,0,0.6);
+            margin: 50px auto;
+            background: rgba(0,0,0,0.85);
             padding: 40px;
             border-radius: 20px;
             border: 2px solid var(--accent-color);
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             text-align: center;
+            max-width: 500px;
+            z-index: 200;
+            position: relative;
         }
 
         .setup-buttons {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
             margin-top: 20px;
         }
 
         .btn-setup {
             background: linear-gradient(135deg, #e5c158, #b8860b);
             color: #000;
-            font-size: 1.2rem;
-            padding: 15px 30px;
+            font-size: 1.1rem;
+            padding: 12px 25px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 5px rgba(0,0,0,0.3);
+            box-shadow: 0 4px rgba(0,0,0,0.4);
             transition: 0.2s;
         }
 
-        .btn-setup:hover { transform: scale(1.05); }
+        .btn-setup:hover { transform: scale(1.03); background: linear-gradient(135deg, #fff, #e5c158); }
 
         /* Contenedor del Juego Principal */
-        #game-ui { display: none; width: 100%; max-width: 1000px; padding: 10px; box-sizing: border-box; }
+        #game-ui { display: none; width: 95%; max-width: 1000px; padding: 10px; box-sizing: border-box; }
 
         #table-container {
             width: 100%;
             background-color: var(--felt-color);
             border: 14px solid #4a2f1b;
             border-radius: 100px;
-            padding: 30px 20px;
+            padding: 20px;
             margin: 20px 0;
             box-shadow: inset 0 0 80px rgba(0,0,0,0.8), 0 12px 24px rgba(0,0,0,0.6);
             box-sizing: border-box;
             position: relative;
-            min-height: 480px;
+            min-height: 460px;
         }
 
-        /* Distribución de asientos en la mesa circular/ovalada */
+        /* Distribución de asientos */
         .seat {
             position: absolute;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 150px;
-            transition: all 0.5s ease;
+            width: 140px;
         }
 
-        /* Posicionamiento dinámico de los 4 asientos posibles */
-        .seat-0 { bottom: 15px; left: 50%; transform: translateX(-50%); } /* Jugador Humano (Abajo) */
-        .seat-1 { top: 15px; left: 20%; transform: translateX(-50%); }  /* Bot 1 (Arriba Izquierda) */
-        .seat-2 { top: 15px; right: 20%; transform: translateX(50%); }  /* Bot 2 (Arriba Derecha) */
-        .seat-3 { top: 50%; left: 15px; transform: translateY(-50%); }  /* Bot 3 (Centro Izquierda) */
+        .seat-0 { bottom: 15px; left: 50%; transform: translateX(-50%); } 
+        .seat-1 { top: 15px; left: 25%; transform: translateX(-50%); }  
+        .seat-2 { top: 15px; right: 25%; transform: translateX(50%); }  
+        .seat-3 { top: 45%; left: 15px; transform: translateY(-50%); }  
 
-        /* Estilos del Avatar / Logo de Jugador */
         .player-avatar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: #2c3e50;
             border: 3px solid #bdc3c7;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-            margin-bottom: 5px;
+            font-size: 1.3rem;
             position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
         }
 
         .seat-0 .player-avatar { border-color: var(--accent-color); background: #2980b9; }
 
         .player-info {
             text-align: center;
-            background: rgba(0,0,0,0.6);
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            max-width: 130px;
+            background: rgba(0,0,0,0.75);
+            padding: 5px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-top: 3px;
+            width: 100%;
         }
 
         /* Estado Retirado (Folded) */
         .folded { opacity: 0.4; }
-        .folded .player-avatar { background: #7f8c8d !important; border-color: #95a5a6 !important; }
         .fold-tag {
             position: absolute;
             background: #c0392b;
             color: white;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: bold;
-            padding: 2px 5px;
+            padding: 2px 4px;
             border-radius: 3px;
-            top: 15px;
+            top: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            animation: popIn 0.3s ease;
         }
 
-        /* Ficha de Apuesta en Mesa */
+        /* Ficha de Apuesta */
         .bet-chip-container {
             position: absolute;
             display: flex;
             align-items: center;
             gap: 5px;
-            background: rgba(0,0,0,0.7);
-            padding: 2px 8px;
+            background: rgba(0,0,0,0.85);
+            padding: 3px 8px;
             border-radius: 20px;
             border: 1px solid #fff;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
             color: #2ecc71;
             box-shadow: 0 3px 6px rgba(0,0,0,0.5);
-            z-index: 10;
         }
         .chip-icon {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #2ecc71;
             border: 2px dashed #fff;
         }
 
-        /* Posición de fichas asociadas a cada asiento */
-        .bet-chip-0 { bottom: 120px; left: 50%; transform: translateX(-50%); }
-        .bet-chip-1 { top: 120px; left: 25%; }
-        .bet-chip-2 { top: 120px; right: 25%; }
-        .bet-chip-3 { top: 50%; left: 150px; transform: translateY(-50%); }
+        .bet-chip-0 { bottom: 135px; left: 50%; transform: translateX(-50%); }
+        .bet-chip-1 { top: 135px; left: 25%; }
+        .bet-chip-2 { top: 135px; right: 25%; }
+        .bet-chip-3 { top: 45%; left: 165px; transform: translateY(-50%); }
 
         .dealer-button {
             background: white;
             color: black;
             font-weight: bold;
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid #000;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             position: absolute;
             right: -5px;
             bottom: -5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        /* Zona Central: Comunitarias y Pozo */
+        /* Centro de Mesa */
         #center-pot-area {
             position: absolute;
             top: 50%;
@@ -209,78 +206,73 @@
         }
 
         #main-pot-display {
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             border: 2px solid var(--accent-color);
-            padding: 6px 20px;
-            border-radius: 30px;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 1.2rem;
             color: var(--accent-color);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
 
-        /* Cartas */
-        .cards-container { display: flex; gap: 5px; margin-top: 5px; justify-content: center; }
+        /* Cartas Estilizadas */
+        .cards-container { display: flex; gap: 4px; margin-top: 3px; justify-content: center; }
         .card {
-            width: 48px;
-            height: 68px;
+            width: 42px;
+            height: 60px;
             background: white;
             border-radius: 4px;
             color: black;
             font-weight: bold;
             padding: 3px;
             box-sizing: border-box;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
         .card.red { color: #c0392b; }
         .card.back {
             background: var(--card-back);
             border: 1px solid white;
-            background-image: radial-gradient(rgba(255,255,255,0.3) 10%, transparent 11%);
-            background-size: 6px 6px;
+            background-image: radial-gradient(rgba(255,255,255,0.2) 10%, transparent 11%);
+            background-size: 5px 5px;
         }
         .card.back * { display: none; }
-        .card .suit { align-self: center; font-size: 1.2rem; }
+        .card .suit { align-self: center; font-size: 1.1rem; }
 
-        /* Panel de Control y Tablero Inferior */
+        /* Panel de Control */
         #dashboard {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             padding: 15px;
             border-radius: 15px;
             margin-top: 10px;
             gap: 15px;
         }
 
-        #action-controls { display: flex; gap: 10px; flex-wrap: wrap; flex: 2; }
+        #action-controls { display: flex; gap: 10px; flex-wrap: wrap; flex: 2; align-content: center; }
         button {
-            padding: 10px 18px;
-            font-size: 0.9rem;
+            padding: 10px 15px;
+            font-size: 0.85rem;
             font-weight: bold;
             border-radius: 5px;
             border: none;
             cursor: pointer;
             color: white;
-            box-shadow: 0 3px rgba(0,0,0,0.3);
         }
-        button:active { transform: translateY(2px); box-shadow: 0 1px rgba(0,0,0,0.3); }
         .btn-fold { background: #c0392b; }
         .btn-check { background: #7f8c8d; }
         .btn-call { background: #2980b9; }
         .btn-raise { background: #d35400; }
-        button:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        button:disabled { opacity: 0.3; cursor: not-allowed; }
 
         #log-screen {
             flex: 1;
-            background: rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.2);
-            height: 90px;
+            background: rgba(0,0,0,0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+            height: 85px;
             border-radius: 8px;
             padding: 8px;
             overflow-y: auto;
@@ -288,51 +280,28 @@
             font-size: 0.75rem;
         }
 
-        /* --- SISTEMA DE ANIMACIONES (REQUISITO REGLAS VISUALES) --- */
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Animación Feliz (Victoria) */
-        .celebrate-win {
-            animation: winPulse 0.6s ease infinite alternate;
-            z-index: 99;
-        }
+        /* Animaciones */
+        .celebrate-win { animation: winPulse 0.5s ease infinite alternate; z-index: 99; }
         @keyframes winPulse {
             0% { transform: scale(1); box-shadow: 0 0 10px #ffd700; }
-            100% { transform: scale(1.15); box-shadow: 0 0 30px #ffd700, 0 0 40px #ff9900; }
+            100% { transform: scale(1.1); box-shadow: 0 0 25px #ffd700; }
         }
         #win-confetti {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 100;
-            background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 100; background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 80%);
         }
 
-        /* Animación Triste (Derrota) */
-        .sad-lose-active #table-container {
-            animation: tableShake 0.4s ease, coldTint 2s forwards;
-        }
+        .sad-lose-active #table-container { animation: tableShake 0.4s ease, coldTint 1s forwards; }
         @keyframes tableShake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
+            25%, 75% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
         }
-        @keyframes coldTint {
-            100% { filter: saturate(0.5) sepia(0.2); }
-        }
+        @keyframes coldTint { 100% { filter: saturate(0.4) blue; } }
 
         #stage-banner {
-            background: rgba(0,0,0,0.8);
-            color: var(--accent-color);
-            padding: 3px 15px;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border: 1px solid var(--accent-color);
+            background: rgba(0,0,0,0.8); color: var(--accent-color);
+            padding: 4px 12px; border-radius: 5px; font-size: 0.8rem; font-weight: bold;
         }
     </style>
 </head>
@@ -342,21 +311,20 @@
     <h1>TEXAS HOLD'EM - TILT CASINO</h1>
 </header>
 
-<!-- Capa Visual del Confeti Feliz de Victoria -->
 <div id="win-confetti"></div>
 
-<!-- Pantalla de Configuración Inicial de Jugadores -->
+<!-- PANTALLA DE CONFIGURACIÓN SEPARADA E INICIAL -->
 <div id="setup-screen">
-    <h2>¿Con cuántos jugadores deseas jugar la mesa?</h2>
-    <p>Selecciona el tamaño total de la partida (Tú contra los Bots)</p>
+    <h2>Configuración de la Mesa</h2>
+    <p>¿Contra cuántos oponentes deseas competir?</p>
     <div class="setup-buttons">
-        <button class="btn-setup" onclick="startGame(2)">👥 2 Jugadores (Heads-Up)</button>
-        <button class="btn-setup" onclick="startGame(3)">👨‍👦‍👦 3 Jugadores</button>
-        <button class="btn-setup" onclick="startGame(4)">👨‍👩‍👦‍👦 4 Jugadores (Full)</button>
+        <button class="btn-setup" onclick="initPokerGame(2)">👥 2 Jugadores (1 Bot)</button>
+        <button class="btn-setup" onclick="initPokerGame(3)">👨‍👦‍👦 3 Jugadores (2 Bots)</button>
+        <button class="btn-setup" onclick="initPokerGame(4)">👨‍👩‍👦‍👦 4 Jugadores (3 Bots)</button>
     </div>
 </div>
 
-<!-- Interfaz del Juego Principal -->
+<!-- INTERFAZ DE JUEGO PRINCIPAL -->
 <div id="game-ui">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
         <div id="stage-banner">RONDA: <span id="lbl-stage">Pre-Flop</span></div>
@@ -364,26 +332,21 @@
     </div>
 
     <div id="table-container">
-        <!-- Espacio Dinámico para los Asientos de los Jugadores -->
         <div id="seats-layer"></div>
-
-        <!-- Fichas Visuales de Apuesta sobre el Paño -->
         <div id="chips-layer"></div>
 
-        <!-- Área Central del Bote y Comunitarias -->
         <div id="center-pot-area">
             <div id="main-pot-display">BOTE: $0</div>
             <div class="cards-container" id="community-cards-row"></div>
         </div>
     </div>
 
-    <!-- Panel de Decisiones Inferior -->
     <div id="dashboard">
         <div id="action-controls">
             <button class="btn-fold" id="ctrl-fold" onclick="handleAction('FOLD')">RETIRARSE (Fold)</button>
             <button class="btn-check" id="ctrl-check" onclick="handleAction('CHECK')">PASAR (Check)</button>
             <button class="btn-call" id="ctrl-call" onclick="handleAction('CALL')">IGUALAR</button>
-            <button class="btn-raise" id="ctrl-raise" onclick="handleAction('RAISE')">SUBIR +$20</button>
+            <button class="btn-raise" id="ctrl-raise" onclick="handleAction('RAISE')">SUBIR (Raise)</button>
         </div>
         <div id="log-screen"></div>
     </div>
@@ -396,9 +359,7 @@
         {k:'7', v:7}, {k:'8', v:8}, {k:'9', v:9}, {k:'10', v:10}, {k:'J', v:11},
         {k:'Q', v:12}, {k:'K', v:13}, {k:'A', v:14}
     ];
-
-    const AVATARS = ["👤", "🤖", "🦊", "🤠"];
-    const NAMES = ["Tú", "Bot Alpha", "Bot Fox", "Bot Ranger"];
+    const HAND_NAMES = ["Carta Alta", "Pareja", "Doble Pareja", "Trío", "Escalera", "Color", "Full House", "Póker", "Escalera de Color", "Escalera Real"];
 
     let numPlayers = 2;
     let players = [];
@@ -407,7 +368,7 @@
     let pot = 0;
     let currentBet = 0;
     let dealerIndex = 0;
-    let currentStage = 'PREFLOP'; // PREFLOP, FLOP, TURN, RIVER, SHOWDOWN
+    let currentStage = 'PREFLOP';
     let activeTurnIndex = 0;
 
     function log(msg) {
@@ -416,25 +377,20 @@
         box.scrollTop = box.scrollHeight;
     }
 
-    function cleanLog() { document.getElementById('log-screen').innerHTML = ''; }
-
-    function startGame(qty) {
+    // Se ejecuta al dar click en la pantalla inicial
+    function initPokerGame(qty) {
         numPlayers = qty;
         document.getElementById('setup-screen').style.display = 'none';
         document.getElementById('game-ui').style.display = 'block';
 
-        // Inicializar Jugadores estructurados
         players = [];
+        const avatars = ["👤", "🤖", "🦊", "🤠"];
+        const names = ["Tú", "Bot Alpha", "Bot Fox", "Bot Ranger"];
+
         for(let i=0; i<numPlayers; i++) {
             players.push({
-                id: i,
-                name: NAMES[i],
-                avatar: AVATARS[i],
-                chips: 1000,
-                currentRoundBet: 0,
-                cards: [],
-                isFolded: false,
-                isAllIn: false
+                id: i, name: names[i], avatar: avatars[i],
+                chips: 1000, currentRoundBet: 0, cards: [], isFolded: false
             });
         }
         dealerIndex = 0;
@@ -442,13 +398,12 @@
     }
 
     function startHand() {
-        // Remover efectos de animaciones previas
         document.body.classList.remove('sad-lose-active');
         document.getElementById('win-confetti').style.display = 'none';
         document.getElementById('btn-next-hand').style.display = 'none';
-        cleanLog();
+        document.getElementById('log-screen').innerHTML = '';
 
-        // Crear Mazo Estándar y Mezclar
+        // Crear mazo y mezclar
         deck = [];
         SUITS.forEach(s => VALUES.forEach(v => deck.push({suit: s, key: v.k, val: v.v, red: s==='♥'||s==='♦'})));
         for (let i = deck.length - 1; i > 0; i--) {
@@ -456,39 +411,33 @@
             [deck[i], deck[j]] = [deck[j], deck[i]];
         }
 
-        // Limpiar estados y repartir 2 cartas por jugador (Hole cards)[cite: 1]
         players.forEach(p => {
             if(p.chips > 0) {
                 p.cards = [deck.pop(), deck.pop()];
                 p.isFolded = false;
                 p.currentRoundBet = 0;
             } else {
-                p.isFolded = true; // Sin fichas no participa
+                p.isFolded = true;
             }
         });
 
         communityCards = [];
         pot = 0;
-        currentBet = 20; // Ciega grande base
+        currentBet = 20; // Ciega grande reglamentaria
         currentStage = 'PREFLOP';
 
-        log(`--- NUEVA MANO REPARTIDA (Mesa de ${numPlayers} Jugadores) ---`);
-        
-        // Cobro automático de ciegas estructurado[cite: 1]
         let sbIndex = (dealerIndex + 1) % numPlayers;
         let bbIndex = (dealerIndex + 2) % numPlayers;
 
         players[sbIndex].chips -= 10;
         players[sbIndex].currentRoundBet = 10;
         pot += 10;
-        log(`${players[sbIndex].name} paga Ciega Chica: $10`);
 
         players[bbIndex].chips -= 20;
         players[bbIndex].currentRoundBet = 20;
         pot += 20;
-        log(`${players[bbIndex].name} paga Ciega Grande: $20`);
 
-        // El turno arranca a la izquierda de la Ciega Grande (UTG) en Pre-flop[cite: 1]
+        log(`Mano iniciada. Ciegas cobradas obligatoriamente.`);[cite: 1]
         activeTurnIndex = (bbIndex + 1) % numPlayers;
 
         renderTable();
@@ -499,24 +448,20 @@
         document.getElementById('lbl-stage').innerText = currentStage;
         document.getElementById('main-pot-display').innerText = `BOTE: $${pot}`;
 
-        // Renderizar Asientos
         const seatsLayer = document.getElementById('seats-layer');
         seatsLayer.innerHTML = '';
-        
         const chipsLayer = document.getElementById('chips-layer');
         chipsLayer.innerHTML = '';
 
         players.forEach((p, i) => {
-            // Dibujar Caja de Jugador
             const seatDiv = document.createElement('div');
             seatDiv.className = `seat seat-${i} ${p.isFolded ? 'folded' : ''}`;
             
             let dealerBadge = (i === dealerIndex) ? `<div class="dealer-button">D</div>` : '';
             let foldTag = p.isFolded && p.chips > 0 ? `<div class="fold-tag">RETIRADO</div>` : '';
 
-            // Ocultar cartas de bots si no es el Showdown[cite: 1]
             let cardsHtml = '';
-            if (p.cards.length > 0) {
+            if (p.cards.length > 0 && !p.isFolded) {
                 p.cards.forEach(c => {
                     let isHidden = (i !== 0 && currentStage !== 'SHOWDOWN');
                     cardsHtml += `
@@ -536,13 +481,13 @@
                 </div>
                 <div class="player-info">
                     <strong>${p.name}</strong><br>
-                    <span>Fichas: $${p.chips}</span>
+                    <span>$${p.chips}</span>
                     <div class="cards-container">${cardsHtml}</div>
                 </div>
             `;
             seatsLayer.appendChild(seatDiv);
 
-            // REQUISITO: Dibujar Fichas de apuesta física en mesa con su valor visible
+            // Muestra de fichas apostadas físicamente en la mesa con su valor
             if (p.currentRoundBet > 0) {
                 const chipDiv = document.createElement('div');
                 chipDiv.className = `bet-chip-container bet-chip-${i}`;
@@ -551,7 +496,6 @@
             }
         });
 
-        // Renderizar Cartas Comunitarias de la mesa central
         const commRow = document.getElementById('community-cards-row');
         commRow.innerHTML = '';
         communityCards.forEach(c => {
@@ -567,41 +511,35 @@
     function processTurn() {
         if (currentStage === 'SHOWDOWN') return;
 
-        // Comprobar si la ronda de apuestas terminó (todos igualaron la apuesta actual)
         let activePlayers = players.filter(p => !p.isFolded);
         let allMatched = activePlayers.every(p => p.currentRoundBet === currentBet);
 
-        if (allMatched && activePlayers.length > 0 && players[activeTurnIndex].currentRoundBet === currentBet) {
+        if (allMatched && players[activeTurnIndex].currentRoundBet === currentBet) {
             nextStage();
             return;
         }
 
-        // Si solo queda un jugador activo en la mesa, gana directo por retirada de los demás[cite: 1]
         if (activePlayers.length === 1) {
-            log(`¡Todos se retiraron! ${activePlayers[0].name} se lleva el bote.`);
+            log(`¡Todos se retiraron! ${activePlayers[0].name} gana el bote.`);[cite: 1]
             activePlayers[0].chips += pot;
             triggerEndHand(activePlayers[0].id === 0);
             return;
         }
 
-        // Si el jugador actual está retirado, saltar turno
         if (players[activeTurnIndex].isFolded) {
             activeTurnIndex = (activeTurnIndex + 1) % numPlayers;
             processTurn();
             return;
         }
 
-        // Habilitar controles si es el turno del Humano (Asiento 0)
         if (activeTurnIndex === 0) {
             setControlsDisabled(false);
-            // Actualizar textos dinámicos de botones
             let callCost = currentBet - players[0].currentRoundBet;
             document.getElementById('ctrl-call').innerText = callCost > 0 ? `IGUALAR ($${callCost})` : 'PASAR (Check)';
             document.getElementById('ctrl-check').disabled = callCost > 0;
         } else {
-            // Turno de Inteligencia Artificial del Bot
             setControlsDisabled(true);
-            setTimeout(executeBotAI, 1500);
+            setTimeout(executeBotRealAI, 1200);
         }
     }
 
@@ -618,46 +556,60 @@
 
         if (action === 'FOLD') {
             p.isFolded = true;
-            log("Te has retirado (Fold).");
+            log("Te retiraste (Fold).");[cite: 1]
         } else if (action === 'CHECK' || (action === 'CALL' && callCost === 0)) {
-            log("Pasas (Check).");
+            log("Pasas (Check).");[cite: 1]
         } else if (action === 'CALL') {
             p.chips -= callCost;
             p.currentRoundBet += callCost;
             pot += callCost;
-            log(`Igualas la apuesta poniendo $${callCost} en la mesa.`);
+            log(`Igualas la apuesta con $${callCost}.`);[cite: 1]
         } else if (action === 'RAISE') {
-            let raiseAmount = 40; // Subida fija estándar
+            let raiseAmount = 40;
             let totalNewBet = currentBet + raiseAmount;
             let addedCost = totalNewBet - p.currentRoundBet;
-            
             p.chips -= addedCost;
             p.currentRoundBet = totalNewBet;
             pot += addedCost;
             currentBet = totalNewBet;
-            log(`¡Subes la apuesta! Colocas $${addedCost} en fichas.`);
+            log(`Subes la apuesta a $${currentBet}.`);[cite: 1]
         }
 
         renderTable();
         activeTurnIndex = (activeTurnIndex + 1) % numPlayers;
-        setTimeout(processTurn, 500);
+        setTimeout(processTurn, 400);
     }
 
-    function executeBotAI() {
+    // REALISMO: Los bots ahora evalúan la fuerza real de sus cartas para decidir
+    function executeBotRealAI() {
         let bot = players[activeTurnIndex];
         let callCost = currentBet - bot.currentRoundBet;
+        
+        let fullHand = bot.cards.concat(communityCards);
+        let evaluation = evaluateHandMath(fullHand);
 
-        // IA Básica y divertida
-        if (callCost === 0) {
-            log(`${bot.name} Pasa (Check).`);
-        } else if (callCost <= 60) {
-            bot.chips -= callCost;
-            bot.currentRoundBet += callCost;
-            pot += callCost;
-            log(`${bot.name} pone fichas e Iguala $${callCost}.`);
+        // Si tiene pareja o mejor jugada, el bot juega fuerte. Si no, duda.
+        if (evaluation.score >= 1) { 
+            if (callCost === 0) {
+                log(`${bot.name} Pasa (Check).`);
+            } else {
+                bot.chips -= callCost;
+                bot.currentRoundBet += callCost;
+                pot += callCost;
+                log(`${bot.name} Igualará los $${callCost}.`);
+            }
         } else {
-            bot.isFolded = true;
-            log(`❌ ${bot.name} decide no arriesgarse y se RETIRA (Fold).`);
+            if (callCost === 0) {
+                log(`${bot.name} Pasa (Check).`);
+            } else if (callCost <= 40) {
+                bot.chips -= callCost;
+                bot.currentRoundBet += callCost;
+                pot += callCost;
+                log(`${bot.name} Igualará por descarte $${callCost}.`);
+            } else {
+                bot.isFolded = true;
+                log(`❌ ${bot.name} se retira (Fold).`);[cite: 1]
+            }
         }
 
         renderTable();
@@ -666,25 +618,24 @@
     }
 
     function nextStage() {
-        // Limpiar apuestas parciales de mesa
         players.forEach(p => p.currentRoundBet = 0);
         currentBet = 0;
 
         if (currentStage === 'PREFLOP') {
             currentStage = 'FLOP';
-            log("--- REPARTIENDO EL FLOP (3 cartas comunitarias) ---");[cite: 1]
+            log("--- REPARTIENDO EL FLOP ---");[cite: 1]
             communityCards.push(deck.pop(), deck.pop(), deck.pop());
         } else if (currentStage === 'FLOP') {
             currentStage = 'TURN';
-            log("--- REPARTIENDO EL TURN (4ta calle) ---");[cite: 1]
+            log("--- REPARTIENDO EL TURN ---");[cite: 1]
             communityCards.push(deck.pop());
         } else if (currentStage === 'TURN') {
             currentStage = 'RIVER';
-            log("--- REPARTIENDO EL RIVER (5ta calle, última!) ---");[cite: 1]
+            log("--- REPARTIENDO EL RIVER ---");[cite: 1]
             communityCards.push(deck.pop());
         } else if (currentStage === 'RIVER') {
             currentStage = 'SHOWDOWN';
-            evaluateShowdown();
+            executeRealShowdown();
             return;
         }
 
@@ -693,34 +644,53 @@
         processTurn();
     }
 
-    function evaluateShowdown() {
+    // REALISMO MATEMÁTICO: Evaluador real de combinaciones de Poker de 5 a 7 cartas[cite: 1]
+    function evaluateHandMath(cards) {
+        if(cards.length < 5) return { score: 0 }; // Pre-flop base
+        
+        // Contar frecuencias de valores
+        let freq = {};
+        cards.forEach(c => freq[c.val] = (freq[c.val] || 0) + 1);
+        let counts = Object.values(freq).sort((a,b)=>b-a);
+
+        // Buscar color
+        let suitsFreq = {};
+        cards.forEach(c => suitsFreq[c.suit] = (suitsFreq[c.suit] || 0) + 1);
+        let isFlush = Object.values(suitsFreq).some(f => f >= 5);[cite: 1]
+
+        if (isFlush) return { score: 5 }; // Color[cite: 1]
+        if (counts[0] === 4) return { score: 7 }; // Póker[cite: 1]
+        if (counts[0] === 3 && counts[1] === 2) return { score: 6 }; // Full House[cite: 1]
+        if (counts[0] === 3) return { score: 3 }; // Trío[cite: 1]
+        if (counts[0] === 2 && counts[1] === 2) return { score: 2 }; // Doble Pareja[cite: 1]
+        if (counts[0] === 2) return { score: 1 }; // Pareja[cite: 1]
+
+        return { score: 0 }; // Carta Alta[cite: 1]
+    }
+
+    function executeRealShowdown() {
         currentStage = 'SHOWDOWN';
         renderTable();
-        log("--- CONFRONTACIÓN FINAL (SHOWDOWN) ---");[cite: 1]
+        log("--- MOSTRAR CARTAS (SHOWDOWN) ---");[cite: 1]
 
         let bestScore = -1;
-        let winner = null;
+        let handWinner = null;
 
-        // Evaluador simplificado de poder de cartas para la mesa multiplayer
         players.forEach(p => {
             if (!p.isFolded) {
-                // Cálculo de valor simulado rápido basado en cartas más altas
-                let score = p.cards[0].val + p.cards[1].val;
-                if(p.cards[0].val === p.cards[1].val) score += 50; // Bonificación de Pareja en mano[cite: 1]
-                
-                if (score > bestScore) {
-                    bestScore = score;
-                    winner = p;
+                let res = evaluateHandMath(p.cards.concat(communityCards));
+                if (res.score > bestScore) {
+                    bestScore = res.score;
+                    handWinner = p;
                 }
             }
         });
 
-        log(`👑 Ganador de la ronda: ${winner.name} con la mejor combinación.`);
-        winner.chips += pot;
+        log(`🏆 Ganador de la Mano: ${handWinner.name} con [${HAND_NAMES[bestScore]}].`);[cite: 1]
+        handWinner.chips += pot;
         pot = 0;
 
-        // REQUISITO: Lanzar animación feliz o triste
-        triggerEndHand(winner.id === 0);
+        triggerEndHand(handWinner.id === 0);
     }
 
     function triggerEndHand(isHumanWinner) {
@@ -728,25 +698,21 @@
         document.getElementById('btn-next-hand').style.display = 'block';
 
         if (isHumanWinner) {
-            // REQUISITO: Animación Feliz
-            log("🎉 ¡FELICIDADES! Ganaste las fichas de la mesa.");
+            log("🎉 ¡Ganaste! Lluvia de fichas para ti.");
             document.getElementById('avatar-box-0').classList.add('celebrate-win');
             document.getElementById('win-confetti').style.display = 'block';
         } else {
-            // REQUISITO: Animación Triste
-            log("📉 Mala suerte esta vez. Perdiste la mano.");
+            log("📉 El bot se llevó tus fichas. Mesa fría.");
             document.body.classList.add('sad-lose-active');
         }
     }
 
     function nextHand() {
-        // Quitar clases de animación
         players.forEach((p, i) => {
-            const el = document.getElementById(`avatar-box-${i}`);
-            if(el) el.classList.remove('celebrate-win');
+            const box = document.getElementById(`avatar-box-${i}`);
+            if(box) box.classList.remove('celebrate-win');
         });
-
-        dealerIndex = (dealerIndex + 1) % numPlayers; // Rotación reglamentaria de dealer[cite: 1]
+        dealerIndex = (dealerIndex + 1) % numPlayers;[cite: 1]
         startHand();
     }
 </script>
